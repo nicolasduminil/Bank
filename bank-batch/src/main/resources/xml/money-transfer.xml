@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE xml>
+<ss:moneyTransfers xmlns:ss="http://www.simplex-software.fr/money-transfer" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.simplex-software.fr/money-transfer ../xsd/money-transfer.xsd ">
+  <ss:moneyTransfer>
+    <ss:sourceAccount accountID="ID0198" accountNumber="4007654329" accountType="SAVINGS" bankName="Société Générale" sortCode="AB234" transCode="XY">
+      <ss:bankAddress cityName="Paris" countryName="France" poBox="PO1234" streetName="rue de Londres" streetNumber="24" zipCode="75008"/>
+    </ss:sourceAccount>
+    <ss:targetAccount accountID="ID0298" accountNumber="4007654330" accountType="SAVINGS" bankName="ING" sortCode="SC9821" transCode="18er670">
+      <ss:bankAddress cityName="Brussels" countryName="Belgium" poBox="None" streetName="Chaussée de Waterloo" streetNumber="49" zipCode="B1002"/>
+    </ss:targetAccount>
+    <ss:amount>51000.85</ss:amount>
+  </ss:moneyTransfer>
+</ss:moneyTransfers>
