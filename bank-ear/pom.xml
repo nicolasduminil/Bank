@@ -55,8 +55,8 @@
                 <cmd>/opt/jboss/wildfly/bin/standalone.sh -c standalone-full.xml -b 0.0.0.0 -bmanagement 0.0.0.0</cmd>
                 <volumes>
                   <bind>
-                    <volume>/home/nicolas/workspace/bank-master/bank-ear/src/main/docker/customization:/opt/jboss/wildfly/customization</volume>
-                    <volume>/home/nicolas/workspace/bank-master/bank-ear/target:/opt/jboss/wildfly/customization/target</volume>
+                    <volume>${basedir}/src/main/docker/customization/customize.sh:/opt/jboss/wildfly/customization/customize.sh</volume>
+                    <volume>${basedir}/target/bank-ear.ear:/opt/jboss/wildfly/customization/target/bank-ear.ear</volume>
                   </bind>
                 </volumes>
                 <ports>
@@ -73,6 +73,14 @@
             <phase>install</phase>
             <goals>
               <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>docker:stop</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>stop</goal>
+              <goal>remove</goal>
             </goals>
           </execution>
         </executions>

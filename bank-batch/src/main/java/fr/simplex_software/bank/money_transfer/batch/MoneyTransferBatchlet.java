@@ -40,7 +40,7 @@ public class MoneyTransferBatchlet extends AbstractBatchlet implements Serializa
     InputStream is = this.getClass().getClassLoader().getResourceAsStream(sourceFileName);
     MoneyTransfers mts = (MoneyTransfers) jaxbUnmarshaller.unmarshal(is);
     for (MoneyTransfer mt : mts.getMoneyTransfers())
-      producer.send(queue, new ReflectionToStringBuilder(mt).toString());
+      producer.send(queue, new ReflectionToStringBuilder(mt, new MultilineRecursiveToStringStyle()).toString());
     return BatchStatus.COMPLETED.name();
   }
 }

@@ -16,7 +16,7 @@
     <version.docker.plugin>0.22.1</version.docker.plugin>
     <version.slf4j>1.7.25</version.slf4j>
     <version.failsafe.plugin>2.18.1</version.failsafe.plugin>
-    <version.apache.commons>3.0</version.apache.commons>
+    <version.apache.commons>3.9</version.apache.commons>
     <maven.compiler.target>1.8</maven.compiler.target>
     <maven.compiler.source>1.8</maven.compiler.source>
   </properties>
