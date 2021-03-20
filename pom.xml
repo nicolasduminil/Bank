@@ -57,6 +57,12 @@
         <scope>test</scope>
       </dependency>
       <dependency>
+        <groupId>org.glassfish.jaxb</groupId>
+        <artifactId>jaxb-runtime</artifactId>
+        <version>2.3.1</version>
+        <scope>runtime</scope>
+      </dependency>
+      <dependency>
         <groupId>fr.simplex-software.bank</groupId>
         <artifactId>bank-jaxb</artifactId>
         <version>0.0.1-SNAPSHOT</version>
