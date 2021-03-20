@@ -1,3 +1,4 @@
+
 #Using Java EE 7 Batch Procession with Wildfly
 
 This blog entry demonstrates the use of the JSR 352 specifications in Java EE 7. 
