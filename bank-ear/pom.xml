@@ -11,10 +11,6 @@
   <dependencies>
     <dependency>
       <groupId>fr.simplex-software.bank</groupId>
-      <artifactId>bank-batch</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>fr.simplex-software.bank</groupId>
       <artifactId>bank-jaxb</artifactId>
     </dependency>
     <dependency>
@@ -48,8 +44,8 @@
         <configuration>
           <images>
             <image>
-              <alias>wfy10</alias>
-              <name>jboss/wildfly:10.1.0.Final</name>
+              <alias>wfy23</alias>
+              <name>jboss/wildfly:23.0.0.Final</name>
               <run>
                 <namingStrategy>alias</namingStrategy>
                 <cmd>/opt/jboss/wildfly/bin/standalone.sh -c standalone-full.xml -b 0.0.0.0 -bmanagement 0.0.0.0</cmd>
