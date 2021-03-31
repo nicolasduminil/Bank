@@ -1,10 +1,13 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
+    <artifactId>money_transfer</artifactId>
     <groupId>fr.simplex-software.bank</groupId>
-    <artifactId>bank-master</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
+  <modelVersion>4.0.0</modelVersion>
   <artifactId>bank-jaxb</artifactId>
   <name>Bank :: The JAXB Module</name>
   <dependencies>
@@ -17,6 +20,10 @@
       <groupId>org.glassfish.jaxb</groupId>
       <artifactId>jaxb-runtime</artifactId>
       <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
     </dependency>
   </dependencies>
   <build>

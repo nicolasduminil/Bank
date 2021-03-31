@@ -3,31 +3,68 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <parent>
-    <artifactId>bank-master</artifactId>
+    <artifactId>money_transfer</artifactId>
     <groupId>fr.simplex-software.bank</groupId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
   <modelVersion>4.0.0</modelVersion>
   <artifactId>bank-batch</artifactId>
-  <name>Bank :: The Tasklet Module</name>
+  <packaging>war</packaging>
+  <name>Bank :: The Batch Module</name>
   <dependencies>
     <dependency>
-      <groupId>org.slf4j</groupId>
-      <artifactId>slf4j-log4j12</artifactId>
+      <groupId>javax</groupId>
+      <artifactId>javaee-api</artifactId>
+      <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.springframework.batch</groupId>
-      <artifactId>spring-batch-core</artifactId>
-    </dependency>
-    <!--dependency>
-      <groupId>org.apache.deltaspike.core</groupId>
-      <artifactId>deltaspike-core-api</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-batch</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-logging</artifactId>
+        </exclusion>
+        <exclusion>
+          <groupId>ch.qos.logback</groupId>
+          <artifactId>logback-classic</artifactId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
-      <groupId>org.apache.deltaspike.core</groupId>
-      <artifactId>deltaspike-core-impl</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-web</artifactId>
+      <exclusions>
+        <exclusion>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-starter-tomcat</artifactId>
+        </exclusion>
+      </exclusions>
+    </dependency>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-undertow</artifactId>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-jms</artifactId>
+      <version>5.3.5</version>
+    </dependency>
+    <dependency>
+      <groupId>org.glassfish.jaxb</groupId>
+      <artifactId>jaxb-runtime</artifactId>
       <scope>runtime</scope>
-    </dependency-->
+    </dependency>
+    <dependency>
+      <groupId>jakarta.xml.bind</groupId>
+      <artifactId>jakarta.xml.bind-api</artifactId>
+    </dependency>
     <dependency>
       <groupId>fr.simplex-software.bank</groupId>
       <artifactId>bank-jaxb</artifactId>
@@ -37,8 +74,80 @@
       <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.batch</groupId>
+      <artifactId>spring-batch-test</artifactId>
+      <scope>test</scope>
     </dependency>
   </dependencies>
+  <build>
+    <finalName>${project.artifactId}</finalName>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <excludes>
+            <exclude>
+              <groupId>org.projectlombok</groupId>
+              <artifactId>lombok</artifactId>
+            </exclude>
+          </excludes>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>io.fabric8</groupId>
+        <artifactId>docker-maven-plugin</artifactId>
+        <version>0.22.1</version>
+        <configuration>
+          <images>
+            <image>
+              <alias>wfy23</alias>
+              <name>jboss/wildfly:23.0.0.Final</name>
+              <run>
+                <namingStrategy>alias</namingStrategy>
+                <cmd>/opt/jboss/wildfly/bin/standalone.sh -c standalone-full.xml -b 0.0.0.0 -bmanagement 0.0.0.0</cmd>
+                <volumes>
+                  <bind>
+                    <volume>${basedir}/src/main/docker/customization:/opt/jboss/wildfly/customization</volume>
+                    <volume>${basedir}/target/bank-batch.war:/opt/jboss/wildfly/customization/target/bank-batch.war</volume>
+                  </bind>
+                </volumes>
+                <ports>
+                  <port>8080:8080</port>
+                  <port>9990:9990</port>
+                </ports>
+              </run>
+            </image>
+          </images>
+        </configuration>
+        <executions>
+          <execution>
+            <id>docker:start</id>
+            <phase>install</phase>
+            <goals>
+              <goal>start</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>docker:stop</id>
+            <phase>clean</phase>
+            <goals>
+              <goal>stop</goal>
+              <goal>remove</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>
