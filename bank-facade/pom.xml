@@ -18,24 +18,20 @@
       <artifactId>lombok</artifactId>
     </dependency>
     <dependency>
-      <groupId>fr.simplex-software.bank</groupId>
-      <artifactId>bank-batch</artifactId>
-    </dependency>
-    <dependency>
       <groupId>org.springframework.batch</groupId>
       <artifactId>spring-batch-core</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-core</artifactId>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
+      <groupId>fr.simplex-software.bank</groupId>
+      <artifactId>bank-jaxb</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-context</artifactId>
+      <groupId>fr.simplex-software.bank</groupId>
+      <artifactId>bank-batch</artifactId>
     </dependency>
   </dependencies>
   <build>

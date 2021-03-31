@@ -1,6 +1,6 @@
 package fr.simplex_software.bank.session;
 
-import fr.simplex_software.bank.money_transfer.batch.tasklets.*;
+import fr.simplex_software.bank.money_transfer.batch.*;
 import lombok.extern.slf4j.*;
 import org.springframework.batch.core.*;
 import org.springframework.batch.core.configuration.annotation.*;
@@ -13,18 +13,17 @@ import java.util.*;
 @Singleton
 @Startup
 @Slf4j
-public class MoneyTransferBatchLauncher extends DefaultBatchConfigurer
+public class BankBatchStarter extends DefaultBatchConfigurer
 {
   @PostConstruct
   public void runMoneyTransferBatchJob()
   {
-    MoneyTransferTasklet moneyTransferTasklet = new MoneyTransferTasklet();
+    MoneyTransferBatchlet moneyTransferTasklet = new MoneyTransferBatchlet();
     JobBuilderFactory jobBuilderFactory = new JobBuilderFactory(this.getJobRepository());
     StepBuilderFactory stepBuilderFactory = new StepBuilderFactory(this.getJobRepository(), this.getTransactionManager());
     Step moneyTransferJobStep = stepBuilderFactory.get("moneyTransferJobStep")
       .tasklet(moneyTransferTasklet)
       .build();
-    log.info("### MoneyTransferBatchLauncher.runMoneyTransferBatchJob(): jobBuilderFactory {}, platformTransactionManager {}, jobRepository {}, stepBuilderFactory {}", jobBuilderFactory, this.getTransactionManager(), this.getJobRepository(), stepBuilderFactory);
     Job job = jobBuilderFactory.get("moneyTransferJob")
       .incrementer(new RunIdIncrementer())
       .flow(moneyTransferJobStep)
